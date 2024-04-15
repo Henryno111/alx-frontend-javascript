@@ -1,8 +1,8 @@
 /* eslint-disabled */
-export default getListStudents() => {
+export default getListStudents() {
 	return [
 	{id: 1, firstName: 'Guillaume', location: 'San Francisco' },
-	{id: 2, firstName: 'James', location: 'Columbia' }
-	{id: 5, firstName: 'Serena', location: 'SanFrancisco' }
+	{id: 2, firstName: 'James', location: 'Columbia' },
+	{id: 5, firstName: 'Serena', location: 'SanFrancisco' },
 	]
 };
