@@ -1,4 +1,5 @@
 export default function cleanSet(mySet, startString) {
+  if (typeof startString !== 'string') return '';
   const setValues = Array.from(mySet);
   console.log(setValues);
   const filteredValues = setValues.filter((value) => {
