@@ -1,48 +1,48 @@
 interface Teacher {
-    firstName: string;
-    lastName: string;
-    fullTimeEmployee: boolean;
-    yearsOfExperience: number;
-    location: string;
-    [key: string]: boolean | number | boolean;
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
+  location: string;
+  contract: boolean;
+  [propName: string]: any;
 }
 
-interface Director extends Teacher {
-    numberOfReports: number;
+interface Directors extends Teacher {
+  numberOfReports: number;
 }
 
-type PrintTeacherFunction = (firstName: string, lastName: string) => string;
-
-const printTeacher: PrintTeacherFunction = (firstName, lastName) => {
-    const firstInitial = firstName.charAt(0).toUpperCase();
-    const fullName = `${firstInitial}. ${lastName}`;
-    return fullName;
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
 }
+
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  return `${firstName[0]}. ${lastName}`;
+};
 
 interface StudentConstructor {
-    firstName: string;
-    lastName: string;
+  new (firstName: string, lastName: string): StudentClassInterface;
 }
 
 interface StudentClassInterface {
-    workOnHomework(): string;
-    displayName(): string;
+  workOnHomework(): string;
+  displayName(): string;
 }
 
-class StudentClass implements StudentClassInterface {
-    firstName: string;
-    lastName: string;
+const StudentClass: StudentConstructor = class StudentClass implements StudentClassInterface {
+  firstName: string;
+  lastName: string;
 
-    constructor({ firstName, lastName }: StudentConstructor) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+  workOnHomework(): string {
+    return "Currently working";
+  }
+  displayName(): string {
+    return this.firstName;
+  }
+};
 
-    workOnHomework() {
-        return "Currently working";
-    }
-
-    displayName() {
-        return this.firstName;
-    }
-}
+export { printTeacher, StudentClass };
