@@ -1,15 +1,16 @@
-/* eslint-disabled */
 import { uploadPhoto, createUser } from './utils';
 
-export default function handleProfileSignup() {
-  uploadPhoto()
-    .then((photoResult) => createUser().then((userResult) => ({ photoResult, userResult })))
-    .then(({ photoResult, userResult }) => {
-      console.log(`${photoResult.body} ${userResult.firstName} ${userResult.lastName}`);
-    })
-    .catch((error) => {
-      console.error('Signup system offline:', error);
-    });
+export default async function asyncUploadUser() {
+  let photo;
+  let user;
+  try {
+    // upload a photo asynchronously
+    photo = await uploadPhoto();
+    // create user asynchronously
+    user = await createUser();
+  } catch (error) {
+    photo = null;
+    user = null;
+  }
+  return { photo, user };
 }
-
-handleProfileSignup();
